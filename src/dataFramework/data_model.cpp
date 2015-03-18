@@ -311,3 +311,17 @@
 		pt_.put("Model.GlobalTransformation.Affine.Data", ss.str());
 
 	}
+
+    void data_model::setTimestamp (std::string scanId, boost::posix_time::ptime ts)
+    {
+        pt_.put("Model.Transformations."+scanId+".timestamp", boost::posix_time::to_iso_string(ts));
+    }
+
+    bool data_model::getTimestamp (std::string scanId, boost::posix_time::ptime &ts)
+    {
+       if (!checkIfExists("Model.Transformations."+scanId+".timestamp")) return false;
+       std::string isoTime;
+       pt_.get("Model.Transformations."+scanId+".timestamp", isoTime);
+       ts = boost::posix_time::from_iso_string(isoTime);
+       return true;
+    }

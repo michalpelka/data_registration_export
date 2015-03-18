@@ -86,6 +86,7 @@ void cloud_cb (const sensor_msgs::PointCloud2ConstPtr& inputMsg)
       pcl::io::savePCDFileBinary(outputModelPath+"/"+pointcloudID+".pcd", pp);
       model.setPointcloudName(pointcloudID, pointcloudID+".pcd");
       model.setAffine(pointcloudID,matrixf);
+      model.setTimestamp(pointcloudID, inputMsg->header.stamp.toBoost());
       model.saveFile(outputModelPath+"/model.xml");
       ROS_INFO("saved to %s",pointcloudID.c_str());
 

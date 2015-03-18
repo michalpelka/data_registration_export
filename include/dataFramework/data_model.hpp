@@ -6,6 +6,7 @@
 #include <boost/optional/optional.hpp>
 #include <Eigen/Eigen>
 #include <boost/filesystem.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 class data_model
 {
 public:
@@ -36,6 +37,9 @@ public:
 	/// sets pcd filename of given scan with id
 	void setPointcloudName (std::string scanId, std::string fn);
 	
+    void setTimestamp (std::string scanId, boost::posix_time::ptime ts);
+    bool getTimestamp (std::string scanId, boost::posix_time::ptime &ts);
+
 	/// sets invoked algorithm name
 	void setAlgorithmName(std::string name);
 	
